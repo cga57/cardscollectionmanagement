@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoginComponent } from './page/login/login.component';
-import { ExploreComponent } from './page/explore/explore.component'; 
+import { ExploreComponent } from './page/explore/explore.component';
+import { CardComponent } from './page/card/card.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ExploreComponent
+    ExploreComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
