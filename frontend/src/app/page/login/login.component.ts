@@ -12,4 +12,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  displayRegistrationInfo(): void {
+    (<HTMLElement>document.getElementById("registerInfo")).style.display = "initial";
+    (<HTMLElement>document.getElementById("loginInfo")).style.display = "none";
+  }
+
+  displayLoginInfo(): void {
+    (<HTMLElement>document.getElementById("loginInfo")).style.display = "initial";
+    (<HTMLElement>document.getElementById("registerInfo")).style.display = "none";
+  }
 }
