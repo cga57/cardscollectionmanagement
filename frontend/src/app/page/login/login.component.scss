@@ -6,7 +6,7 @@
     z-index: 1;
     top: 0;
     overflow: hidden;
-  }
+}
   
 /* Control the left side */
 .left {
@@ -22,7 +22,9 @@ img {
   
 /* Control the right side */
 .right {
+    background: #f1f1f1;
     right: 0;
+    font-family: Arial;
 }
   
 /* If you want the content centered horizontally and vertically */
@@ -50,4 +52,8 @@ img {
 
 #registerInfo {
     display: none;
+}
+
+.topInput {
+    margin-top: 20px;
 }

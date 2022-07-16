@@ -7,7 +7,7 @@ body {
 
 .header {
     padding: 30px;
-    font-size: 40px;
+    font-size: 25px;
     text-align: center;
     background: white;
 }
@@ -48,4 +48,15 @@ body {
 .row {
     max-width: 80%;
     margin: auto;
+}
+
+ul li {
+    display: inline;
+    padding: 30px;
+}
+
+#user_icon {
+    margin-left: 30px;
+    height: 100px;
+    width: 100px;
 }
