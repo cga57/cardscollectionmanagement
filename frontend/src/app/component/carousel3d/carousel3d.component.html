@@ -1,0 +1,31 @@
+<div class="slider-container"
+		 (swipeleft)="nextSlide()"
+		 (swiperight)="prevSlide()"
+>
+
+	<span class="arrow-left" (click)="prevSlide()"></span>
+	<span class="arrow-right" (click)="nextSlide()"></span>
+	
+	<div class="slider" id="slider">
+		<img class="slide" 
+				 *ngFor="let s of slides; let i = index"
+				 [class.prev-2]="i == activeIndex - 2"
+				 [class.prev-1]="i == activeIndex - 1"
+				 [class.active]="i == activeIndex"
+				 [class.next-1]="i == activeIndex + 1"
+				 [class.next-2]="i == activeIndex + 2"
+				 src="{{ s['image'] }}" 
+				 alt="{{ s['name'] }}"
+		>
+		<!--hover over:	 -->
+		<!--{{ s['name'] }}-->
+	</div>
+
+	<div class="dots">
+		<span *ngFor="let s of slides; let i = index"
+			 		[class.active]="i == activeIndex"
+			 		(click)="jumpToSlide( i )"
+		></span>
+	</div>
+
+</div>

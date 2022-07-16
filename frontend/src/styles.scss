@@ -52,6 +52,7 @@ $custom-colors:
 	'quaternary': $quaternary,
 );
 $theme-colors: map-merge( $theme-colors, $custom-colors );
+
 $body-bg: $light-3;
 $text-color: $dark-1;
 
@@ -60,7 +61,7 @@ $font-size-percentage: 1;
 $font-size-base: 1rem * $font-size-percentage;
 $font-family-base: Inter;
 
-@import 'bootstrap';
+@import 'bootstrap/scss/bootstrap';
 
 
 /********** default **********/
