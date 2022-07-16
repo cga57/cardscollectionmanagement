@@ -57,9 +57,10 @@ $body-bg: $light-3;
 $text-color: $dark-1;
 
 // typography
+$font-family-base: Inter;
 $font-size-percentage: 1;
 $font-size-base: 1rem * $font-size-percentage;
-$font-family-base: Inter;
+$font-weight-base: 500;
 
 @import 'bootstrap/scss/bootstrap';
 
