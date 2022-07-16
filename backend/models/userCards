@@ -1,0 +1,20 @@
+const mongoose = require("mongoose");
+
+// mongoose.connect(
+//   "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
+// );
+// var test = mongoose.connection;
+
+var Schema = mongoose.Schema;
+
+var userCardsSchema = new Schema({
+  username: { type: String },
+  condition: { type: Boolean },
+  storage: { type: Number },
+  additional_notes: { type: String },
+  cost: { type: Number },
+});
+
+var UserCards = mongoose.model("UserCards", userCardsSchema);
+
+module.exports = UserCards;
