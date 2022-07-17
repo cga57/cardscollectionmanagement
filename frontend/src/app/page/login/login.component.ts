@@ -16,4 +16,8 @@ export class LoginComponent implements OnInit {
   navigateToRegister(): void {
     this.router.navigateByUrl('/register');
   }
+
+  navigateToExplore(): void {
+    this.router.navigateByUrl('/');
+  }
 }
