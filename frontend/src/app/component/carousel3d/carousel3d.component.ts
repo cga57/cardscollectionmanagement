@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Deck } from 'src/app/model/deck';
 
 @Component({
 	selector: 'app-carousel3d',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class Carousel3dComponent implements OnInit 
 {
-	@Input() slides : { [ key : string ] : string }[] = [];
+	@Input() slides : Deck[] = [];
 	activeIndex = 0;
 
 	constructor() { }
