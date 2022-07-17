@@ -1,39 +1,60 @@
 <div class="header">
-    <ul>
-      <li><a href="#"><img class="image" src="assets/logo.svg"></a></li>
-      <li><a href="#">Explore</a></li>
-      <li><a href="#">Portal</a></li>
-      <li><a href="#">Selling List</a></li>
-      <li><a href="#">Tutorial / FAQ</a></li>
-      <li><a href="#"><img class="image" src="assets/user_icon.png"></a></li>
+    <ul class="header-ul">
+      <li class="header-li"><a href="#"><img class="image" src="assets/logo.svg"></a></li>
+      <li class="header-li"><a href="#">Explore</a></li>
+      <li class="header-li"><a href="#">Portal</a></li>
+      <li class="header-li"><a href="#">Selling List</a></li>
+      <li class="header-li"><a href="#">Tutorial / FAQ</a></li>
+      <li class="header-li"><a href="#"><img class="image" src="assets/user_icon.png"></a></li>
     </ul>
 </div>
   
 <div class="row">
     <div class="leftcolumn">
       <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg" style="height:200px;">Image</div>
-        <p>Some text..</p>
+        <div class="fakeimg" style="height:600px;">Image of deck</div>
       </div>
       <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Sep 2, 2017</h5>
-        <p>Some text..</p>
+        <h3>Inventory count:</h3>
+        <ul>
+          <li class="body-li"><p>Total: </p><input type="text"><br></li>
+          <li class="body-li"><p>Sealed: </p><input type="text"><br></li>
+          <li class="body-li"><p>Opened: </p><input type="text"></li>
+        </ul>
       </div>
     </div>
     <div class="rightcolumn">
+      <br>
+      <h1>Title of deck</h1>
+      <ul>
+        <li class="body-li"><p>Edition: </p><input type="text"><br><br></li>
+        <li class="body-li"><p>Style: </p><input type="text"><br><br></li>
+        <li class="body-li"><p>Brand: </p><input type="text"><br><br></li>
+        <li class="body-li"><p>Product description: </p><textarea></textarea></li>
+      </ul>
       <div class="card">
-        <h2>Filler</h2>
-        <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        <h3>Product details:</h3>
+        <ul>
+          <li class="body-li"><p>Date of issue: </p><input type="text"><br></li>
+          <li class="body-li"><p>Stock: </p><input type="text"><br></li>
+          <li class="body-li"><p>Retail price: </p><input type="text"><br></li>
+          <li class="body-li"><p>Print run: </p><input type="text"><br></li>
+          <li class="body-li"><p>Manufacturer: </p><input type="text"></li>
+        </ul>
       </div>
       <div class="card">
-        <h3>Filler</h3>
+        <ul>
+          <li class="body-li"><p>Storage: </p><input type="text"><br></li>
+          <li class="body-li"><p>Cost: </p><input type="text"></li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Filler</h3>
-        <p>Some text..</p>
+      <div style="margin-bottom:50px;" class="card">
+        <h3>Notes:</h3>
+        <textarea></textarea><br>
+        <ul>
+          <li class="body-li"><button>Save inventory</button><br></li>
+          <li class="body-li"><button>Save to public</button></li>
+        </ul>
       </div>
     </div>
 </div>
