@@ -16,4 +16,8 @@ export class CardComponent implements OnInit {
   navigateToExplore(): void {
     this.router.navigateByUrl('/');
   }
+
+  saveInventory(): void {
+    console.log("saveInventory() works!")
+  }
 }
