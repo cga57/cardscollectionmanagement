@@ -34,11 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // this is for adding deck to private deck userbase
 // here is where we
-app.get("/addDeckToUser", (req, res) => {
+app.get("/api/addDeckToUser", (req, res) => {
   res.send("Add Deck Works!");
 });
 // this is for adding deck to public user database
-app.post("/addDeck", (req, res) => {
+app.post("/api/addDeck", (req, res) => {
   const deckData = req.body;
   console.log("This is the data body: ", deckData);
   const newDeck = new UserDeck(deckData);
@@ -51,3 +51,8 @@ app.post("/addDeck", (req, res) => {
     }
   });
 });
+
+app.get( '/api/weirdstring', ( req, res ) => 
+{
+	res.send( 'weirdstring' );
+} );
