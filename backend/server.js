@@ -23,6 +23,9 @@ testConnectionDb.on("connected", () => {
   console.log("Connected");
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // serve frontend application
 app.get("/", (req, res) => {
   res.send("App Works!");
@@ -32,9 +35,6 @@ app.get("/", (req, res) => {
 app.listen(port, function () {
   console.log(`Server is running on port ${port}`);
 });
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.get("/api/addDeckToUser", (req, res) => {
   res.send("Add Deck Works!");
