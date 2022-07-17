@@ -73,6 +73,8 @@ export class CardComponent implements OnInit {
       deck: deck_object
     }
 
-    this.http.post(this.url + 'addDeck', user_deck);
+    this.http.post(this.url + 'addDeck', user_deck).subscribe(data => {
+      console.log(data);
+    });
   }
 }
