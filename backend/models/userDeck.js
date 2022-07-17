@@ -29,7 +29,7 @@ var UserDeckSchema = new Schema({
   additional_notes: { type: String }, // extra info like condition, seal number, etc
 });
 
-var UserDeck = mongoose.model("user_cards", UserDeckSchema);
+var UserDeck = mongoose.model("User_cards", UserDeckSchema);
 
 // exports
 module.exports.Schema = UserDeckSchema;
