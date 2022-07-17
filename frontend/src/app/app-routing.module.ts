@@ -4,6 +4,7 @@ import { ExploreComponent } from './page/explore/explore.component';
 import { LoginComponent } from './page/login/login.component';
 import { CardComponent } from './page/card/card.component';
 import { RegisterComponent } from './page/register/register.component';
+import { PortalComponent } from './page/portal/portal.component';
 
 const routes: Routes = 
 [
@@ -11,6 +12,7 @@ const routes: Routes =
 	{ path: 'login', component: LoginComponent },
   	{ path: 'card', component: CardComponent},
 	{ path: 'register', component: RegisterComponent},
+	{ path: 'portal', component: PortalComponent },
 ];
 
 @NgModule({
