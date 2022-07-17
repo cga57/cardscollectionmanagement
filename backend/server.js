@@ -32,12 +32,11 @@ app.listen(port, function () {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// this is for adding deck to private deck userbase
-// here is where we
 app.get("/api/addDeckToUser", (req, res) => {
   res.send("Add Deck Works!");
 });
-// this is for adding deck to public user database
+
+// this is for adding deck to private user database
 app.post("/api/addDeck", (req, res) => {
   const deckData = req.body;
   console.log("This is the data body: ", deckData);

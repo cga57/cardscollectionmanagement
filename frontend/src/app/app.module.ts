@@ -44,8 +44,8 @@ export class HammerConfig extends HammerGestureConfig
   ],
   imports: [
     BrowserModule,
-	HammerModule,
-	HttpClientModule,
+	  HammerModule,
+	  HttpClientModule,
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,

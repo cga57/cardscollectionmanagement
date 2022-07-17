@@ -2,7 +2,7 @@ import { Deck } from 'src/app/model/deck';
 
 export interface UserDeck
 {
-	_id: string
+	_id?: string
 	deck: Deck,
 
 	storage?: string,
