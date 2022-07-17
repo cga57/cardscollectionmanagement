@@ -1,5 +1,7 @@
 // variables
-$height: 512px;
+@import '/src/styles.scss';
+$width: 250px;
+$height: 350px;
 
 .slider-container 
 {
@@ -26,7 +28,7 @@ $height: 512px;
 			cursor: pointer;
 			z-index: 9;
 			border-top: 15px solid transparent;
-			border-right: 30px solid #C85054;
+			border-right: 30px solid $dark-1;
 			border-bottom: 15px solid transparent;
 
 			@media (max-width: 768px) 
@@ -46,7 +48,7 @@ $height: 512px;
 			cursor: pointer;
 			z-index: 9;
 			border-top: 15px solid transparent;
-			border-left: 30px solid #C85054;
+			border-left: 30px solid $dark-1;
 			border-bottom: 15px solid transparent;
 			
 			@media (max-width: 768px) 
@@ -103,7 +105,7 @@ $height: 512px;
 			{
 				&:before 
 				{
-					background-color: #C85054;
+					background-color: $dark-1;
 					opacity: 1;
 				}
 			}
@@ -119,7 +121,6 @@ $height: 512px;
 		margin: 0 auto;
 		position: relative;
 		text-align: center;
-		line-height: $height;
 		color: white;
 
 		@media (max-width: 768px) 
@@ -130,20 +131,25 @@ $height: 512px;
 		// item in slider
 		.slide 
 		{
-			display: inline-block;
-			//width: 80%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			width: $width;
 			height: $height;
 			position: absolute;
 			left: 50%;
 			top: 50%;
 			transform: translate3d(-50%, -50%, 0) scale3d(.4, .4, 1);
 			transition: transform 0.3s ease-in-out 0s, z-index .2s ease-in-out .1s;
-			background-color: #2C2A40;
+			background-color: $dark-4;
 
-			@media (max-width: 768px) 
+			// background image
+			img
 			{
-				//width: 100%;
-				//height: 450px;
+				width: $width;
+				height: $height;
+				object-fit: cover;
 			}
 
 			// 5 slides on screen

@@ -21,7 +21,7 @@ export class Carousel3dComponent implements OnInit
 
 	nextSlide() : void
 	{
-		if( this.activeIndex < this.slides.length - 1 )
+		if( this.activeIndex < this.slides.length )
 		{
 			this.activeIndex++;
 		}
