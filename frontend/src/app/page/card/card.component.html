@@ -11,9 +11,12 @@
   
 <div class="row">
     <div class="leftcolumn">
-      <button style="margin-top:20px;" (click)="navigateToExplore()">← Back</button>
+      <button class="btn" style="margin-top:20px;" (click)="navigateToExplore()">← Back</button>
       <div class="card">
         <div class="fakeimg" style="height:600px;">Image of deck</div>
+        <br>
+        <label for="img">Select image:</label>
+        <input type="file" id="img" name="img" accept="image/*">
       </div>
       <div class="card">
         <h3>Inventory count:</h3>
@@ -56,8 +59,8 @@
         <h3>Notes:</h3>
         <textarea></textarea><br>
         <ul>
-          <li class="body-li"><button>Save inventory</button><br></li>
-          <li class="body-li"><button>Save to public</button></li>
+          <li class="body-li"><button class="btn btn-primary">Save inventory</button><br></li>
+          <li class="body-li"><button class="btn btn-primary">Save to public</button></li>
         </ul>
       </div>
     </div>
