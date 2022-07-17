@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-var userCardsSchema = new Schema({
+var userDeckSchema = new Schema({
   username: { type: String },
   condition: { type: Boolean },
   storage: { type: Number },
@@ -15,6 +15,8 @@ var userCardsSchema = new Schema({
   cost: { type: Number },
 });
 
-var UserCards = mongoose.model("UserCards", userCardsSchema);
+var UserDeck = mongoose.model("UserDeck", userDeckSchema);
 
-module.exports = UserCards;
+// exports
+module.exports.schema = userDeckSchema;
+module.exports.model = UserDeck;

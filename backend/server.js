@@ -2,19 +2,21 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
-const UserCard = require("./models/userCards");
+const UserDeck = require("./models/userDeck").model;
 port = 3081;
 
 // code for authentication put here - eventually can be put into a seperate file
 
-const cardsUsers = [];
+const deckUsers = [];
 
 app.get("/", (req, res) => {
   res.send("App Works!");
 });
+
 app.listen(port, function () {
   console.log(`Server is running on port ${port}`);
 });
+
 mongoose.connect(
   "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
 );
@@ -26,20 +28,20 @@ testConnectionDb.on("connected", () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// this is for adding card to private card userbase
+// this is for adding deck to private deck userbase
 // here is where we
-app.get("/addCardToUser", (req, res) => {
-  res.send("App Works!");
+app.get("/addDeckToUser", (req, res) => {
+  res.send("Add Deck Works!");
 });
-// this is for adding card to public user database
-app.post("/addCard", (req, res) => {
-  const cardData = req.body;
-  console.log("This is the data body: ", cardData);
-  const newCard = new UserCard(cardData);
+// this is for adding deck to public user database
+app.post("/addDeck", (req, res) => {
+  const deckData = req.body;
+  console.log("This is the data body: ", deckData);
+  const newDeck = new UserDeck(deckData);
 
-  newCard.save((error) => {
+  newDeck.save((error) => {
     if (error) {
-      res.status(500).json({ msg: "Issue with saving card into database" });
+      res.status(500).json({ msg: "Issue with saving deck into database" });
     } else {
       res.json();
     }

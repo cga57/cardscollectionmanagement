@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { simpleCards } from '../../model/simpleCards';
+import { sampleDecks } from '../../model/sampleDecks';
 
 @Component({
 	selector: 'app-explore',
@@ -8,7 +8,7 @@ import { simpleCards } from '../../model/simpleCards';
 })
 export class ExploreComponent implements OnInit 
 {
-	cards = simpleCards;
+	decks = sampleDecks;
 
 	constructor() { }
 
