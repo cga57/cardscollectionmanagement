@@ -2,27 +2,31 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
-const UserDeck = require("./models/userDeck").model;
+const UserDeck = require("./models/userDeck").Model;
 port = 3081;
 
 // code for authentication put here - eventually can be put into a seperate file
 
 const deckUsers = [];
 
+
+// mongoDB connection
+mongoose.connect(
+	"mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
+);
+var testConnectionDb = mongoose.connection;
+testConnectionDb.on("connected", () => {
+	console.log("Connected");
+});
+
+// serve frontend application
 app.get("/", (req, res) => {
   res.send("App Works!");
 });
 
+// listening for port
 app.listen(port, function () {
   console.log(`Server is running on port ${port}`);
-});
-
-mongoose.connect(
-  "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
-);
-var testConnectionDb = mongoose.connection;
-testConnectionDb.on("connected", () => {
-  console.log("Connected");
 });
 
 app.use(express.json());
