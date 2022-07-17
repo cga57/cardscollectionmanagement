@@ -9,14 +9,13 @@ port = 3081;
 
 const deckUsers = [];
 
-
 // mongoDB connection
 mongoose.connect(
-	"mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
+  "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
 );
 var testConnectionDb = mongoose.connection;
 testConnectionDb.on("connected", () => {
-	console.log("Connected");
+  console.log("Connected");
 });
 
 // serve frontend application
@@ -39,6 +38,7 @@ app.get("/api/addDeckToUser", (req, res) => {
 // this is for adding deck to private user database
 app.post("/api/addDeck", (req, res) => {
   const deckData = req.body;
+  console.log("Post call read in server! ");
   console.log("This is the data body: ", deckData);
   const newDeck = new UserDeck(deckData);
 
@@ -51,7 +51,6 @@ app.post("/api/addDeck", (req, res) => {
   });
 });
 
-app.get( '/api/weirdstring', ( req, res ) => 
-{
-	res.send( 'weirdstring' );
-} );
+app.get("/api/weirdstring", (req, res) => {
+  res.send("weirdstring");
+});
