@@ -15,6 +15,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: "cardsCollectionApplication",
   }
 );
 var testConnectionDb = mongoose.connection;
