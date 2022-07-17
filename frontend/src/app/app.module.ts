@@ -13,6 +13,7 @@ import { GuestNavComponent } from './component/guest-nav/guest-nav.component';
 import { Carousel3dComponent } from './component/carousel3d/carousel3d.component'; 
 
 import * as Hammer from 'hammerjs';
+import { RegisterComponent } from './page/register/register.component';
 
 // hammer config
 @Injectable() 
@@ -31,7 +32,8 @@ export class HammerConfig extends HammerGestureConfig
     ExploreComponent,
     CardComponent,
     GuestNavComponent,
-    Carousel3dComponent
+    Carousel3dComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

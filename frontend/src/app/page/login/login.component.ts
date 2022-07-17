@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  displayRegistrationInfo(): void {
-    (<HTMLElement>document.getElementById("registerInfo")).style.display = "initial";
-    (<HTMLElement>document.getElementById("loginInfo")).style.display = "none";
-  }
-
-  displayLoginInfo(): void {
-    (<HTMLElement>document.getElementById("loginInfo")).style.display = "initial";
-    (<HTMLElement>document.getElementById("registerInfo")).style.display = "none";
+  navigateToRegister(): void {
+    this.router.navigateByUrl('/register');
   }
 }
