@@ -3,6 +3,7 @@
   </div>
   
   <div class="split right">
+    <button class="btn" style="margin:20px;" (click)="navigateToExplore()">← Back</button>
     <div class="centered">
       <img src="assets/logo.svg">
       <form id="registerInfo" onsubmit="return false">
@@ -18,8 +19,8 @@
         <p>Re-Enter Password: </p>
         <input type="password">
         <br><br>
-        <button id="loginBtn" (click)="navigateToLogin()">Login</button>
-        <button id="registerBtn">Register</button>
+        <button class="btn btn-primary" id="loginBtn" (click)="navigateToLogin()">Login</button>
+        <button class="btn btn-primary" id="registerBtn">Register</button>
       </form>
     </div>
   </div>
