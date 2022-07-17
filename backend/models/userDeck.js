@@ -22,11 +22,11 @@ var Schema = mongoose.Schema;
 
 var UserDeckSchema = new Schema({
   // user_id: { type: mongoose.ObjectId}, // reference to user to avoid large array
-  // deck: { type: mongoose.ObjectId, require: true }, // reference to deck to reduce document size
+  deck: { type: JSON, require: true }, // reference to deck to reduce document size
 
-  storage: { type: String }, // where did you put your deck
-  cost: { type: Number }, // how much did you buy the deck
-  additional_notes: { type: String }, // extra info like condition, seal number, etc
+  // storage: { type: String }, // where did you put your deck
+  // cost: { type: Number }, // how much did you buy the deck
+  // additional_notes: { type: String }, // extra info like condition, seal number, etc
 });
 
 var UserDeck = mongoose.model("User_cards", UserDeckSchema);
