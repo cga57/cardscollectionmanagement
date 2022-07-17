@@ -21,7 +21,7 @@ testConnectionDb.on("connected", () => {
 var Schema = mongoose.Schema;
 
 var UserDeckSchema = new Schema({
-  // user_id: { type: mongoose.ObjectId, require: true }, // reference to user to avoid large array
+  // user_id: { type: mongoose.ObjectId}, // reference to user to avoid large array
   // deck: { type: mongoose.ObjectId, require: true }, // reference to deck to reduce document size
 
   storage: { type: String }, // where did you put your deck
@@ -33,5 +33,4 @@ var UserDeck = mongoose.model("user_cards", UserDeckSchema);
 
 // exports
 module.exports.Schema = UserDeckSchema;
-// module.exports.Model = UserDeck;
-module.exports = UserDeck;
+module.exports.Model = UserDeck;
