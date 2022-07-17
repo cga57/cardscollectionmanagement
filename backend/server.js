@@ -11,7 +11,11 @@ const deckUsers = [];
 
 // mongoDB connection
 mongoose.connect(
-  "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority"
+  "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
 );
 var testConnectionDb = mongoose.connection;
 testConnectionDb.on("connected", () => {
