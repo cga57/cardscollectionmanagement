@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { sampleDecks } from 'src/app/model/sampleDecks';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-collection',
@@ -10,8 +11,11 @@ export class CollectionComponent implements OnInit {
 
 	decks = sampleDecks;
 
-	constructor() { }
+	constructor(private router: Router,) { }
 
 	ngOnInit(): void { }
 
+	navigateToCard(): void {
+		this.router.navigateByUrl('/card');
+	}
 }

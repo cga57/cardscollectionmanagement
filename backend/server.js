@@ -25,6 +25,7 @@ testConnectionDb.on("connected", () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static('dist/cardessory'));
 
 // serve frontend application
 app.get("/", (req, res) => {
