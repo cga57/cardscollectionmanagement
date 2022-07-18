@@ -1,5 +1,5 @@
 <section class="d-flex flex-row flex-wrap">
-	<a class="deck rounded-3 m-2" href='/card'>
+	<a id="addCard" class="deck rounded-3 m-2" (click)="navigateToCard()">
 		<img class="deck-icon rounded-3" src="assets/icons/add.svg" alt="add deck" width="48px">
 	</a>
 	<div class="deck rounded-3 m-2" *ngFor="let d of decks">
