@@ -1,26 +1,23 @@
 <div class="split left">
-    <img src="assets/background.png">
+  <img src="assets/background.png">
+</div>
+
+<div class="split right">
+  <button class="btn" style="margin:20px;" (click)="goBack()">← Back</button>
+  <div class="centered">
+    <img src="assets/logo.svg">
+    <form id="registerInfo" onsubmit="return false">
+      <p class="topInput">Name: </p>
+      <input id="name" type="text">
+      <br><br>
+      <p>Email: </p>
+      <input id="email" type="text">
+      <br><br>
+      <p>Password: </p>
+      <input id="pwd" type="password">
+      <br><br>
+      <button class="btn btn-primary" id="loginBtn" (click)="navigateToLogin()">Login</button>
+      <button class="btn btn-primary" id="registerBtn">Register</button>
+    </form>
   </div>
-  
-  <div class="split right">
-    <button class="btn" style="margin:20px;" (click)="goBack()">← Back</button>
-    <div class="centered">
-      <img src="assets/logo.svg">
-      <form id="registerInfo" onsubmit="return false">
-        <p class="topInput">Name: </p>
-        <input type="text">
-        <br><br>
-        <p>Email: </p>
-        <input type="text">
-        <br><br>
-        <p>Password: </p>
-        <input type="password">
-        <br><br>
-        <p>Re-Enter Password: </p>
-        <input type="password">
-        <br><br>
-        <button class="btn btn-primary" id="loginBtn" (click)="navigateToLogin()">Login</button>
-        <button class="btn btn-primary" id="registerBtn">Register</button>
-      </form>
-    </div>
-  </div>
+</div>
