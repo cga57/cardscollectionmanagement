@@ -18,6 +18,7 @@ mongoose.connect(
     dbName: "cardsCollectionApplication",
   }
 );
+
 var testConnectionDb = mongoose.connection;
 testConnectionDb.on("connected", () => {
   console.log("Connected");
