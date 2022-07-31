@@ -70,6 +70,9 @@ export class CardComponent implements OnInit {
       document.getElementById("manufacturer")
     )).value;
 
+    var img: HTMLInputElement = <HTMLInputElement>document.getElementById('deck-img');
+    var pathName: string = img.value;;
+
     var deck_brand_object: Brand = {
       name: deck_brand,
     };
@@ -78,7 +81,7 @@ export class CardComponent implements OnInit {
       isPublic: false,
       name: deck_title,
       edition: deck_edition,
-      image: "",
+      image: pathName,
       brand: deck_brand_object,
       date_of_issue: deck_date_of_issue,
       stock: deck_stock,

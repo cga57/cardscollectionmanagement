@@ -8,7 +8,7 @@ const DeckSchema = new Schema
 	isPublic: { type: Boolean, require: true }, 	// to identify public to all user or private to an user
 	name: { type: String, require: true },
 	edition: { type: String, require: true },
-	image: { type: Buffer }, 						// not sure if Buffer is the correct type for image
+	image: { type: String }, 						// not sure if Buffer is the correct type for image
 	date_of_issue: { type: Date },
 	stock: { type: String },
 	finish: { type: String },

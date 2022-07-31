@@ -4,33 +4,13 @@
     <div class="leftcolumn">
       <button class="btn" style="margin-top:20px;" (click)="goBack()">← Back</button>
       <div class="card">
-        <div class="fakeimg" style="height:600px;">Image of deck</div>
-        <br>
-        <label for="deck-img">Select image:</label>
-        <input type="file" id="deck-img" name="deck-img" accept="image/*">
+        <form method="POST" id="addImageForm" action="http://localhost:3081/api/addImage" enctype="multipart/form-data">
+          <label for="deck-img">Select image:</label>
+          <input type="file" id="deck-img" name="deck-img">
+        </form>
       </div>
       <div class="card">
-        <h3>Inventory count:</h3>
-        <ul>
-          <li class="body-li"><p>Total: </p><input id="total" type="text"><br></li>
-          <li class="body-li"><p>Sealed: </p><input id="sealed" type="text"><br></li>
-          <li class="body-li"><p>Opened: </p><input id="opened" type="text"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="rightcolumn">
-      <div class="card">
-        <h3>General details:</h3>
-        <ul>
-          <li class="body-li"><p>Title: </p><input id="title" type="text"><br><br></li>
-          <li class="body-li"><p>Edition: </p><input id="edition" type="text"><br><br></li>
-          <li class="body-li"><p>Style: </p><input id="style" type="text"><br><br></li>
-          <li class="body-li"><p>Brand: </p><input id="brand" type="text"><br><br></li>
-          <li class="body-li"><p>Product description: </p><textarea id="product-description"></textarea></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Product details:</h3>
+      <h3>Product details:</h3>
         <ul>
           <li class="body-li"><p>Date of issue: </p><input id="date-of-issue" type="text"><br></li>
           <li class="body-li"><p>Stock: </p><input id="stock" type="text"><br></li>
@@ -46,11 +26,31 @@
           <li class="body-li"><p>Cost: </p><input id="cost" type="text"></li>
         </ul>
       </div>
+    </div>
+    <div class="rightcolumn">
+      <div class="card">
+        <h3>General details:</h3>
+        <ul>
+          <li class="body-li"><p>Title: </p><input id="title" type="text"><br><br></li>
+          <li class="body-li"><p>Edition: </p><input id="edition" type="text"><br><br></li>
+          <li class="body-li"><p>Style: </p><input id="style" type="text"><br><br></li>
+          <li class="body-li"><p>Brand: </p><input id="brand" type="text"><br><br></li>
+          <li class="body-li"><p>Product description: </p><textarea id="product-description"></textarea></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Inventory count:</h3>
+        <ul>
+          <li class="body-li"><p>Total: </p><input id="total" type="text"><br></li>
+          <li class="body-li"><p>Sealed: </p><input id="sealed" type="text"><br></li>
+          <li class="body-li"><p>Opened: </p><input id="opened" type="text"></li>
+        </ul>
+      </div>
       <div style="margin-bottom:50px;" class="card">
         <h3>Notes:</h3>
         <textarea id="notes"></textarea><br>
         <ul>
-          <li class="body-li"><button class="btn btn-primary" (click)="saveInventory()">Save inventory</button><br></li>
+          <li class="body-li"><button type="submit" form="addImageForm" class="btn btn-primary" (click)="saveInventory()">Save inventory</button><br></li>
           <li class="body-li"><button class="btn btn-primary">Save to public</button></li>
         </ul>
       </div>

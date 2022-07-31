@@ -3,6 +3,22 @@ const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
 const UserDeck = require("./models/userDeck").Model;
+
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images")
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    // Store the file as the current date and the name of the files together
+    // To ensure that each image name is unique
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({storage: storage})
+
 port = 3081;
 
 // code for authentication put here - eventually can be put into a seperate file
@@ -57,6 +73,11 @@ app.post("/api/addDeck", (req, res) => {
     }
   });
 });
+
+app.post("/api/addImage", upload.single("deck-img"), (req, res) => {
+  res.status(204);
+  res.end();
+})
 
 app.get("/api/weirdstring", (req, res) => {
   res.send("weirdstring");
