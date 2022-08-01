@@ -7,9 +7,9 @@ port = 3081;
 // used in class example to help code this
 
 const session = require("express-session");
-const MongoDBSession = require("connect-mongodb-session");
+const MongoDBSession = require("connect-mongodb-session")(session);
 
-const mongoUri = "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority/cardsCollectionApplication";
+const mongoUri = "mongodb+srv://ash:finalproject@cluster0.ilz0p.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
   .connect(
@@ -17,14 +17,15 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      dbName: "cardsCollectionApplication",
     }
   )
   .then(console.log("Connected in authentication"));
 
-// const storage = new MongoDBSession({
-//   uri: mongoUri,
-//   collection: "Users",
-// });
+const storage = new MongoDBSession({
+  uri: mongoUri,
+  collection: "Users",
+});
 
 app.use(
   session({
@@ -32,11 +33,14 @@ app.use(
     secret: "qqq",
     resave: false,
     maxAge: 60 * 60 * 1000, // 60 minutes
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: storage
 
   })
 );
-
+app.get("/", (req, res) => { 
+  console.log(req.session.id)
+});
 app.get("/api/session", (req, res) => {
   // ask db if this is a valid applicationUser based on req.body
   applicationUser = req.body;
@@ -51,6 +55,7 @@ app.get("/api/session", (req, res) => {
     // invalid - redirect them to login again
     // currently all logins are valid atm
     // eventually plan to only implement logins that are not found in the users database
+    console.log("Error in login")
   }
 });
 app.listen(port, function () {
