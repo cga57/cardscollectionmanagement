@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const deckRoute = require( './routes/deck' );
+
 const app = express();
-const UserDeck = require("./models/userDeck").Model;
 
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -15,9 +16,9 @@ const storage = multer.diskStorage({
     // To ensure that each image name is unique
     cb(null, file.originalname)
   }
-})
+});
 
-const upload = multer({storage: storage})
+const upload = multer({storage: storage});
 
 port = 3081;
 
@@ -40,9 +41,10 @@ testConnectionDb.on("connected", () => {
   console.log("Connected");
 });
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("dist/cardessory"));
+app.use(express.json());
+app.use( '/api', deckRoute );
 
 // serve frontend application
 app.get("/", (req, res) => {
@@ -54,31 +56,7 @@ app.listen(port, function () {
   console.log(`Server is running on port ${port}`);
 });
 
-app.get("/api/addDeckToUser", (req, res) => {
-  res.send("Add Deck Works!");
-});
-
-// this is for adding deck to private user database
-app.post("/api/addDeck", (req, res) => {
-  const deckData = req.body;
-  console.log("Post call read in server! ");
-  console.log("This is the data body: ", deckData);
-  const newDeck = new UserDeck(deckData);
-
-  newDeck.save((error) => {
-    if (error) {
-      res.status(500).json({ msg: "Issue with saving deck into database" });
-    } else {
-      res.json();
-    }
-  });
-});
-
 app.post("/api/addImage", upload.single("deck-img"), (req, res) => {
   res.status(204);
   res.end();
-})
-
-app.get("/api/weirdstring", (req, res) => {
-  res.send("weirdstring");
 });

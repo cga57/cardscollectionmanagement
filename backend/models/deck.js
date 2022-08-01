@@ -1,5 +1,5 @@
 const mongoose = require( "mongoose" );
-const BrandSchema = require( 'models/brand' ).Schema;
+const BrandSchema = require( './brand' ).Schema;
 
 const Schema = mongoose.Schema;
 
@@ -15,6 +15,7 @@ const DeckSchema = new Schema
 	print_run: { type: Number },
 	retail_price: { type: Number },
 	manufacturer: { type: String },
+	product_description: { type: String },
 
 	// use embedding model for fast read speed and document doesn't change often
 	brand: { type: BrandSchema },
@@ -23,5 +24,5 @@ const DeckSchema = new Schema
 var DeckModel = mongoose.model( "Deck", DeckSchema );
 
 // exports
-module.exports.schema = DeckSchema;
-module.exports.model = DeckModel;
+module.exports.Schema = DeckSchema;
+module.exports.Model = DeckModel;

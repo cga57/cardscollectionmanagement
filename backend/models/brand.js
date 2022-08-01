@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const BrandSchema = new Schema
 ( {
-	name: { type: String, required: true },
+	name: { type: String },
 	website: { type: String },
 	instagram: { type: String },
 } );

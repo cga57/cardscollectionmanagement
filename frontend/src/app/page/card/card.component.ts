@@ -6,6 +6,7 @@ import { UserDeck } from "src/app/model/user-deck";
 import { Brand } from "src/app/model/brand";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { StorageApiService } from "src/app/service/storage-api.service";
 
 @Component({
   selector: "app-card",
@@ -18,7 +19,7 @@ export class CardComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
-    private http: HttpClient
+    private storage: StorageApiService,
   ) {}
 
   ngOnInit(): void {}
@@ -28,6 +29,9 @@ export class CardComponent implements OnInit {
   }
 
   saveInventory(): void {
+    var deck_notes: string = (<HTMLTextAreaElement>(
+      document.getElementById("notes")
+    )).value;
     var deck_total: string = (<HTMLInputElement>(
       document.getElementById("total")
     )).value;
@@ -54,11 +58,21 @@ export class CardComponent implements OnInit {
       document.getElementById("product-description")
     )).value;
 
+    var deck_storage: string = (<HTMLInputElement>(
+      document.getElementById("storage")
+    )).value;
+    var deck_cost: string = (<HTMLInputElement>(
+      document.getElementById("cost")
+    )).value;
+
     var deck_date_of_issue: string = (<HTMLInputElement>(
       document.getElementById("date-of-issue")
     )).value;
     var deck_stock: string = (<HTMLInputElement>(
       document.getElementById("stock")
+    )).value;
+    var deck_finish: string = (<HTMLInputElement>(
+      document.getElementById("finish")
     )).value;
     var deck_retail_price: string = (<HTMLInputElement>(
       document.getElementById("retail-price")
@@ -83,24 +97,29 @@ export class CardComponent implements OnInit {
       edition: deck_edition,
       image: pathName,
       brand: deck_brand_object,
-      date_of_issue: deck_date_of_issue,
+	  date_of_issue: new Date( deck_date_of_issue ),
       stock: deck_stock,
-      print_run: deck_print_run,
-      retail_price: deck_retail_price,
+	  finish: deck_finish,
+      print_run: Number( deck_print_run ),
+      retail_price: Number( deck_retail_price ),
       manufacturer: deck_manufacturer,
-      total: deck_total,
-      sealed: deck_sealed,
-      opened: deck_opened,
-      style: deck_style,
+      //style: deck_style, 	// <-- abandoned attribute :P
       product_description: deck_product_description,
     };
 
     var user_deck: UserDeck = {
-      deck: deck_object,
+		//total: deck_total, 	// <-- this is a derived attribute (= sealed + opened)
+		sealed: Number( deck_sealed ),
+		opened: Number( deck_opened ),
+		storage: deck_storage,
+		cost: Number( deck_cost ),
+		additional_notes: deck_notes,
     };
 
-    this.http.post(this.url + "addDeck", user_deck).subscribe((data) => {
-      console.log(data);
-    });
+	this.storage.addUserDeck( user_deck, deck_object )
+		.subscribe( {
+			next: data => console.log( 'successfully added user deck' ),
+			error: err => console.error( 'failed to add user deck' ),
+		} );
   }
 }

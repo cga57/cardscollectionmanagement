@@ -10,15 +10,11 @@ export interface Deck
 	brand: Brand,
 
 	// optional
-	date_of_issue?: any,
+	date_of_issue?: Date,
 	stock?: string,
 	finish?: string,
-	print_run?: any,
-	retail_price?: any,
+	print_run?: number,
+	retail_price?: number,
 	manufacturer?: string,
-	total?: any;
-	sealed?: any;
-	opened?: any;
-	style?: any;
-	product_description?: any;
+	product_description?: string;
 }
