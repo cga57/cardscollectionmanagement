@@ -25,7 +25,7 @@ export class CardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.session.getEmail)
+    console.log(this.session.getEmail())
   }
 
   goBack(): void {
@@ -106,23 +106,22 @@ export class CardComponent implements OnInit {
       edition: deck_edition,
       image: pathName,
       brand: deck_brand_object,
-	  date_of_issue: new Date( deck_date_of_issue ),
+	    date_of_issue: new Date( deck_date_of_issue ),
       stock: deck_stock,
-	  finish: deck_finish,
+	    finish: deck_finish,
       print_run: Number( deck_print_run ),
       retail_price: Number( deck_retail_price ),
       manufacturer: deck_manufacturer,
-      //style: deck_style, 	// <-- abandoned attribute :P
       product_description: deck_product_description,
     };
 
     var user_deck: UserDeck = {
-		//total: deck_total, 	// <-- this is a derived attribute (= sealed + opened)
-		sealed: Number( deck_sealed ),
-		opened: Number( deck_opened ),
-		storage: deck_storage,
-		cost: Number( deck_cost ),
-		additional_notes: deck_notes,
+      _id: this.session.getEmail(),
+      sealed: Number( deck_sealed ),
+      opened: Number( deck_opened ),
+      storage: deck_storage,
+      cost: Number( deck_cost ),
+      additional_notes: deck_notes,
     };
 
 	this.storage.addUserDeck( user_deck, deck_object )
