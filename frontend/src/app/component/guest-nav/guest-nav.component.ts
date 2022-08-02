@@ -11,24 +11,24 @@ export class GuestNavComponent implements OnInit {
   constructor(private session: UserSessionService) { }
 
   ngOnInit(): void {
-    var isLoggedIn: Boolean = this.session.getLoggedInStatus();
+    //var isLoggedIn: Boolean = this.session.getLoggedInStatus();
     
-    console.log(isLoggedIn)
+    //console.log(isLoggedIn)
     
-    var guestDocuments: HTMLCollectionOf<HTMLElement> = <HTMLCollectionOf<HTMLElement>>document.getElementsByClassName("guest");
-    var userDocuments: HTMLCollectionOf<HTMLElement> = <HTMLCollectionOf<HTMLElement>>document.getElementsByClassName("user");
+    //var guestDocuments: HTMLCollectionOf<HTMLElement> = <HTMLCollectionOf<HTMLElement>>document.getElementsByClassName("guest");
+    //var userDocuments: HTMLCollectionOf<HTMLElement> = <HTMLCollectionOf<HTMLElement>>document.getElementsByClassName("user");
     
-    if(isLoggedIn) {
-      for(let i = 0; i < guestDocuments.length; i++) {
-        console.log(guestDocuments.item(i))
-        guestDocuments.item(i)!.setAttribute("style", "display: none; cursor: pointer;")
-      }
-      for(let i = 0; i < userDocuments.length; i++) {
-        console.log(userDocuments.item(i))
-        userDocuments.item(i)!.setAttribute("style", "display: initial; cursor: pointer;")
-      }
-    }
-    // else do nothing
+    //if(isLoggedIn) {
+      //for(let i = 0; i < guestDocuments.length; i++) {
+        //console.log(guestDocuments.item(i))
+        //guestDocuments.item(i)!.setAttribute("style", "display: none; cursor: pointer;")
+      //}
+      //for(let i = 0; i < userDocuments.length; i++) {
+        //console.log(userDocuments.item(i))
+        //userDocuments.item(i)!.setAttribute("style", "display: initial; cursor: pointer;")
+      //}
+    //}
+    //// else do nothing
   }
 
   logout(): void {

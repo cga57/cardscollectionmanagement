@@ -17,7 +17,8 @@ export class UserSessionService {
 	email: string = "null";
 	loggedIn: boolean = false;
 	private collection: Collection;
-	private broadcast: BehaviorSubject<Collection>;
+	private broadcastCollection: BehaviorSubject<Collection>;
+	private broadcastLoginStatus: BehaviorSubject<boolean>;
 	
 
 	constructor( 
@@ -32,13 +33,14 @@ export class UserSessionService {
 			userDecks: [],
 		};
 
-		this.broadcast = new BehaviorSubject<Collection>( this.collection );
+		this.broadcastCollection = new BehaviorSubject<Collection>( this.collection );
 		
 		if( sessionStorage.getItem( 'userEmail' ) )
 		{
 			this.email = sessionStorage.getItem( 'userEmail' )!;
 			this.loggedIn = true;
 		}
+		this.broadcastLoginStatus = new BehaviorSubject<boolean>( this.loggedIn );
 	}
 
 	getCollection(): Observable<Collection>
@@ -49,7 +51,12 @@ export class UserSessionService {
 				this.collection.userDecks = data[0];
 				this.collection.decks = data[1];
 			} );
-		return this.broadcast.asObservable();
+		return this.broadcastCollection.asObservable();
+	}
+
+	getStatus(): Observable<boolean>
+	{
+		return this.broadcastLoginStatus.asObservable();
 	}
 
 	getEmail(): string {
@@ -62,8 +69,9 @@ export class UserSessionService {
 
 	setEmail(email: string) {
 		this.email = email;
-		this.loggedIn = true;
 		sessionStorage.setItem( 'userEmail', email );
+		this.loggedIn = true;
+		this.broadcastLoginStatus.next( this.loggedIn );
 	}
 
 	login( user: User ): void {
@@ -85,5 +93,6 @@ export class UserSessionService {
 		this.http.delete( this.url + 'logout' )
 			.subscribe( data => console.log( data ) );
 		sessionStorage.removeItem( 'userEmail' );
+		this.broadcastLoginStatus.next( this.loggedIn );
 	}
 }
