@@ -34,14 +34,6 @@ testConnectionDb.on("connected", () => {
   console.log("Connected");
 });
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static("dist/cardessory"));
-app.use(express.json());
-app.use( '/api', deckRoute );
-app.use('/api', userDeckRoute);
-app.use( '/api', userRoute );
-app.use( '/api', imageRoute );
-
 const authenticationStorage = new MongoDBSession({
   uri: uri,
   collection: "sessions",
@@ -58,6 +50,14 @@ app.use(
 
   })
 );
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static("dist/cardessory"));
+app.use(express.json());
+app.use( '/api', deckRoute );
+app.use('/api', userDeckRoute);
+app.use( '/api', userRoute );
+app.use( '/api', imageRoute );
 
 // passed into /api/login
 const auth = (req, res, next) => { 

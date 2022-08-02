@@ -17,7 +17,7 @@ router.post( "/user", async( req, res ) =>
   const email = userData.email;
   const activeUser = await User.findOne({ email });
   if(activeUser){
-    return res.send({msg: "Already registered"});
+    return res.status( 400 ).send({msg: "Already registered"});
   }
   console.log( "Registering a new user to db..." );
   console.log( userData )
