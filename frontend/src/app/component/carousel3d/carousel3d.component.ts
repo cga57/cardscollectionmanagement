@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Deck } from 'src/app/model/deck';
+import { UserSessionService } from 'src/app/service/user-session.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-carousel3d',
@@ -11,9 +13,12 @@ export class Carousel3dComponent implements OnInit
 	@Input() slides : Deck[] = [];
 	activeIndex = 0;
 
-	constructor() { }
+	constructor(private router: Router,private session: UserSessionService) { }
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		var isLoggedIn: boolean = this.session.getLoggedInStatus();
+		console.log(isLoggedIn)
+	}
 
 	jumpToSlide( index : number ) : void
 	{
@@ -33,6 +38,16 @@ export class Carousel3dComponent implements OnInit
 		if( this.activeIndex > 0 )
 		{
 			this.activeIndex--;
+		}
+	}
+
+	redirection(): void {
+		var isLoggedIn: boolean = this.session.getLoggedInStatus();
+		console.log(isLoggedIn)
+		if(isLoggedIn) {
+			this.router.navigateByUrl('/card');
+		} else {
+			this.router.navigateByUrl('/login');
 		}
 	}
 }
