@@ -107,6 +107,12 @@ export class StorageApiService
 		//return this.http.delete<User>( this.url + 'user/' + id );
 	//}
 	
+	// retrieve all decks of a user; return [ UserDeck[], Deck[] ]
+	public getAllDecks( uid: string ): Observable<[]>
+	{
+		return this.http.get<[]>( this.url + 'allDecks/' + uid );
+	}
+	
 
 	/********** image api **********/ 
 
