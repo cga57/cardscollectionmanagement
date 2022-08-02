@@ -84,6 +84,7 @@ app.listen(port, function () {
 app.get("/api/login", async (req, res) => {
   // ask db if this is a valid applicationUser based on req.body
   applicationUser = req.body;
+  console.log(applicationUser);
   email = applicationUser.email
   const activeUser = await User.findOne({ email })
   if (!activeUser) {
