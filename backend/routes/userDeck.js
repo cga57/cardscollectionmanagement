@@ -4,9 +4,7 @@ const UserDeck = require("../models/userDeck").Model;
 const router = express.Router();
 
 
-/********** user deck api **********/
-
-// retrie a deck from table
+// retrieve a deck from table
 router.get( '/userDeck/:id', async( req, res ) =>
 {
 	console.log( 'Retrieving an user deck from database...' );
@@ -32,6 +30,16 @@ router.post( "/userDeck", async( req, res ) =>
 	}
 });
 
+// update a deck in the table
+router.put( '/userDeck', async( req, res ) =>
+{
+	console.log( 'Updating an user deck in database...' );
+
+	const id = req.body._id;
+	const deck = UserDeck( req.body );
+	UserDeck.findByIdAndUpdate( id, deck, ( err, deck ) => responseHandler( err, deck, res, 'updating' ) );
+} );
+
 // handle database api callback and respond to client
 const responseHandler = ( error, doc, res, mode ) =>
 {
@@ -45,5 +53,6 @@ const responseHandler = ( error, doc, res, mode ) =>
 		res.status( 200 ).json( doc );
 	}
 }
+
 
 module.exports = router;
