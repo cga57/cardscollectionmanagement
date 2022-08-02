@@ -20,6 +20,7 @@ router.post( "/user", async( req, res ) =>
     return res.send({msg: "Already registered"});
   }
   console.log( "Registering a new user to db..." );
+  console.log( userData )
 
   const hashed = await bcrypt.hash(userData.password, 12);
   userData.password = hashed;
