@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/login")
       } else if(data.msg == "Portal") {
         this.router.navigateByUrl("/portal")
+        console.log(data.authenticatedEmail)
       }
     })
   }

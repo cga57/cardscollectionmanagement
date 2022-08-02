@@ -86,19 +86,18 @@ app.post("/api/login", async (req, res) => {
   applicationUser = req.body;
   console.log(applicationUser);
   email = applicationUser.email;
-  console.log(email);
   const activeUser = await User.findOne({ email })
-  console.log(activeUser);
   if (!activeUser) {
+    console.log("!activeUser")
     res.send({msg: "Login"});
     return;
   } 
   const check = await bcrypt.compare(applicationUser.password, activeUser.password)
-  console.log(check)
   if (!check) {
+    console.log("!check")
     res.send({msg: "Login"});
     return;
   }
   req.session.isAuth = true;
-  res.send({msg: "Portal"});
+  res.send({msg: "Portal", authenticatedEmail: email});
 });
