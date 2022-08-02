@@ -6,6 +6,12 @@ const router = express.Router();
 
 /********** user deck api **********/
 
+// retrie a deck from table
+router.get( '/userDeck/:id', async( req, res ) =>
+{
+	console.log( 'Retrieving an user deck from database...' );
+	UserDeck.findById( req.params.id, ( err, deck ) => responseHandler( err, deck, res, 'retrieving' ) );
+} );
 
 // this is for adding a deck to user collection
 router.post( "/userDeck", async( req, res ) => 
@@ -18,18 +24,7 @@ router.post( "/userDeck", async( req, res ) =>
 
 	if( assciatedDeck )
 	{
-		await newDeck.save( ( error, savedDeck ) =>
-		{
-			if( error ) 
-			{
-				console.log( error );
-				res.status( 500 ).json( "Issue with saving user deck into database" );
-			}
-			else
-			{
-				res.status( 200 ).json( savedDeck._id );
-			}
-		});
+		newDeck.save( ( err, deck ) => responseHandler( err, deck, res, 'adding' ) );
 	}
 	else
 	{
@@ -37,5 +32,18 @@ router.post( "/userDeck", async( req, res ) =>
 	}
 });
 
+// handle database api callback and respond to client
+const responseHandler = ( error, doc, res, mode ) =>
+{
+	if( error )
+	{
+		console.log( error );
+		res.status( 500 ).json( `Issue with ${ mode } user deck in database` );
+	}
+	else
+	{
+		res.status( 200 ).json( doc );
+	}
+}
 
 module.exports = router;
