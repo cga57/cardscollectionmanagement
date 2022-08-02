@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
     var jsonFormat = { name: name, email: email, password: password };
 
-    this.http.post(this.url + "session", jsonFormat).subscribe((data) => {
+    this.http.post(this.url + "user", jsonFormat).subscribe((data) => {
       console.log(data);
     });
   }

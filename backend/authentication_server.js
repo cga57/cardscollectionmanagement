@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
-port = 3081;
+port = 3000;
 
 // used in class example to help code this
 

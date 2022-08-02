@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema
 ( {
-	// login credentials (not sure if we need to store it here if we use passport.js for auth)
 	email: { type: String, require: true, unique: true },
 	password: { type: String, require: true },
 	name: { type: String, require: true }, 							// what do we call the user
