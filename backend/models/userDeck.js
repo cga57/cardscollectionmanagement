@@ -6,6 +6,7 @@ var UserDeckSchema = new Schema({
 	user_id: { type: mongoose.ObjectId, require: true }, 	// reference to user to avoid large array
 	deck: { type: mongoose.ObjectId, require: true }, 		// reference to deck to reduce document size
 
+	email: {type: String},
 	sealed: { type: Number }, 			// amount of sealed decks
 	opened: { type: Number }, 			// amount of opened decks
 	storage: { type: String }, 				// where did you put your deck

@@ -19,6 +19,8 @@ router.post( "/userDeck", async( req, res ) =>
 	const data = req.body;
 	const userDeck = UserDeck( data[0] );
 
+	console.log(userDeck)
+
 	// need to add new deck as well
 	if( data.length === 2 )
 	{
