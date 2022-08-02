@@ -93,7 +93,7 @@ app.post("/api/login", async (req, res) => {
     res.send({msg: "Login"});
     return;
   } 
-  const check = await bcrypt.compare(activeUser.password, applicationUser.password)
+  const check = await bcrypt.compare(applicationUser.password, activeUser.password)
   console.log(check)
   if (!check) {
     res.send({msg: "Login"});
