@@ -81,13 +81,12 @@ app.listen(port, function () {
 });
 
 
-app.get("/api/login", auth, async (req, res) => {
+app.get("/api/login", async (req, res) => {
   // ask db if this is a valid applicationUser based on req.body
   applicationUser = req.body;
   email = applicationUser.email
   const activeUser = await User.findOne({ email })
   if (!activeUser) {
-    // return res.redirect("/login")
     res.send("Login");
     return;
   } 
