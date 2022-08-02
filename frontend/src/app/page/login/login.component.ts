@@ -32,16 +32,7 @@ export class LoginComponent implements OnInit {
 
     var user: any = {email: email, password: password };
 
-    this.http.post(this.url + "login", user).subscribe((data: any) => {
-      if(data.msg == "Login") {
-        this.router.navigateByUrl("/login")
-      } else if(data.msg == "Portal") {
-        this.router.navigateByUrl("/portal")
-        // Store this as a global variable in the service
-        console.log(data.authenticatedEmail)
-        this.session.setEmail(data.authenticatedEmail);
-      }
-    })
+	this.session.login( user );
   }
 
   goBack(): void {
