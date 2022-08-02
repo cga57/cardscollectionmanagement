@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
 
     var user: User = { name: name, email: email, password: password };
 
-<<<<<<< HEAD
     this.storage.addUser(user).subscribe( 
       {
 			  next: data => console.log('Successfully registered new user'),
@@ -53,7 +52,5 @@ export class RegisterComponent implements OnInit {
 			next: data => console.log('user is registered succesfully'),
       error: err => console.error(err.error),
     });
-
->>>>>>> 0c609b252fb7fe49c7ab27ee24b05ba7dd2ce83b
   }
 }
