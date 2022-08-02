@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const deckRoute = require( './routes/deck' );
+const userDeckRoute = require( './routes/userDeck' );
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("dist/cardessory"));
 app.use(express.json());
 app.use( '/api', deckRoute );
+app.use( '/api', userDeckRoute );
 
 // serve frontend application
 app.get("/", (req, res) => {
