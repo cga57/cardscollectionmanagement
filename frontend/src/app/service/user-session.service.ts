@@ -23,4 +23,9 @@ export class UserSessionService {
     this.email = email;
     this.loggedIn = true;
   }
+
+  logout(): void {
+    this.email = "null"
+    this.loggedIn = false
+  }
 }
