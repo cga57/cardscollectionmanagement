@@ -16,9 +16,28 @@ export class StorageApiService
 
 	constructor( private http: HttpClient ) { }
 
-	public addDeck( deck: Deck ): Observable<string>
+	// retrieve a deck; return deck
+	public getDeck( id: string ): Observable<Deck>
 	{
-		return this.http.post<string>( this.url + 'deck', deck );
+		return this.http.get<Deck>( this.url + 'deck/' + id );
+	}
+
+	// add a new deck; return the new deck
+	public addDeck( deck: Deck ): Observable<Deck>
+	{
+		return this.http.post<Deck>( this.url + 'deck', deck );
+	}
+
+	// update a deck; return deck before update
+	public updateDeck( deck: Deck ): Observable<Deck>
+	{
+		return this.http.put<Deck>( this.url + 'deck', deck );
+	}
+
+	// delete a deck; return the deck deleted
+	public deleteDeck( id: string ): Observable<Deck>
+	{
+		return this.http.delete<Deck>( this.url + 'deck/' + id );
 	}
 
 	public addUserDeck( userDeck: UserDeck, deck?: Deck ): Observable<string>
@@ -28,7 +47,7 @@ export class StorageApiService
 			return this.addDeck( deck ).pipe( 
 				map( data =>
 				{
-					userDeck.deck = data;
+					userDeck.deck = data._id;
 					return this.http.post<string>( this.url + 'userDeck', userDeck );
 				} ),
 				concatAll(),

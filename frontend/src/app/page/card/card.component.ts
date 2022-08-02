@@ -119,7 +119,7 @@ export class CardComponent implements OnInit {
 	this.storage.addUserDeck( user_deck, deck_object )
 		.subscribe( {
 			next: data => console.log( 'successfully added user deck' ),
-			error: err => console.error( 'failed to add user deck' ),
+			error: err => console.error( err.error ),
 		} );
   }
 }

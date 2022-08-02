@@ -116,3 +116,4 @@ web_modules/
 
 # angular
 .angular
+dist/
