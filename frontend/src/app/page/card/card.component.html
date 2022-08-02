@@ -4,21 +4,22 @@
     <div class="leftcolumn">
       <button class="btn" style="margin-top:20px;" (click)="goBack()">← Back</button>
       <div class="card">
+        <img id="img-preview">
         <form method="POST" id="addImageForm" action="http://localhost:3081/api/addImage" enctype="multipart/form-data">
           <label for="deck-img">Select image:</label>
-          <input type="file" id="deck-img" name="deck-img">
+          <input type="file" id="deck-img" name="deck-img" (change)="previewImage($event)">
         </form>
       </div>
       <div class="card">
-      <h3>Product details:</h3>
-        <ul>
-          <li class="body-li"><p>Date of issue: </p><input id="date-of-issue" type="date"><br></li>
-          <li class="body-li"><p>Stock: </p><input id="stock" type="text"><br></li>
-          <li class="body-li"><p>Finish: </p><input id="finish" type="text"><br></li>
-          <li class="body-li"><p>Retail price: </p><input id="retail-price" type="number"><br></li>
-          <li class="body-li"><p>Print run: </p><input id="print-run" type="number"><br></li>
-          <li class="body-li"><p>Manufacturer: </p><input id="manufacturer" type="text"></li>
-        </ul>
+        <h3>Product details:</h3>
+          <ul>
+            <li class="body-li"><p>Date of issue: </p><input id="date-of-issue" type="date"><br></li>
+            <li class="body-li"><p>Stock: </p><input id="stock" type="text"><br></li>
+            <li class="body-li"><p>Finish: </p><input id="finish" type="text"><br></li>
+            <li class="body-li"><p>Retail price: </p><input id="retail-price" type="number"><br></li>
+            <li class="body-li"><p>Print run: </p><input id="print-run" type="number"><br></li>
+            <li class="body-li"><p>Manufacturer: </p><input id="manufacturer" type="text"></li>
+          </ul>
       </div>
       <div class="card">
         <h3>Other details:</h3>

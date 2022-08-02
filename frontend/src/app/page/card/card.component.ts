@@ -28,6 +28,11 @@ export class CardComponent implements OnInit {
     this.location.back();
   }
 
+  previewImage(event: any): void {
+    console.log(event.target.files[0]);
+    (<HTMLImageElement>document.getElementById('img-preview')).src = URL.createObjectURL(event.target.files[0]);
+  }
+
   saveInventory(): void {
     var deck_notes: string = (<HTMLTextAreaElement>(
       document.getElementById("notes")
