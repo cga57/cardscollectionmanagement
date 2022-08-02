@@ -1,5 +1,7 @@
 const express = require( 'express' );
 const User = require("../models/user").Model;
+const Deck = require( '../models/deck' ).Model;
+const UserDeck = require("../models/userDeck").Model;
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 
@@ -19,6 +21,29 @@ router.post( "/user", async( req, res ) =>
   newUser.save( ( err, user ) => responseHandler( err, user, res, 'adding' ) );
 
 });
+
+
+// haven't test
+// retrieve all user decks for a specific user
+router.get( '/allDecks/:userId', async( req, res ) =>
+{
+	console.log( 'Retrieving all decks for an user from database' );
+	
+	const uid = req.params.userId;
+	const userDecks = await UserDeck.find( { user_id: uid } ).exec();
+	const deckIds = userDecks.map( ud => ud.deck );
+	const decks = await Deck.find( { _id: { $in: deckIds } } ).exec();
+
+	if( userDecks.length !== 0 && decks.length !== 0 )
+	{
+		res.status( 200 ).json( [ userDecks, decks ] );
+	}
+	else
+	{
+		res.status( 500 ).json( 'Issue with retrieving all decks for user' );
+	}
+} );
+
 
 // handle database api callback and respond to client
 const responseHandler = ( error, doc, res, mode ) =>
