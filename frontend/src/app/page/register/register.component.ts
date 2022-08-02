@@ -40,11 +40,8 @@ export class RegisterComponent implements OnInit {
 
     var user: User = { name: name, email: email, password: password };
 
-    this.storage.addUser( user )
-		.subscribe( {
-			next: data => console.log('successfully registered new user'),
-			error: err => console.error( err.error ),
-		} );
-
+    this.storage.addUser( user ).subscribe( (data) => {
+      this.navigateToLogin();
+    });
   }
 }
