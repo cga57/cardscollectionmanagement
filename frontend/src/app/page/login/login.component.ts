@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { User } from "src/app/model/user";
+import { UserSessionService } from "src/app/service/user-session.service";
 
 @Component({
   selector: "app-login",
@@ -11,7 +12,7 @@ import { User } from "src/app/model/user";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private location: Location, private http: HttpClient) {}
+  constructor(private router: Router, private location: Location, private http: HttpClient, private session: UserSessionService) {}
 
   private url = environment.serverAPI;
   
@@ -37,7 +38,9 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/login")
       } else if(data.msg == "Portal") {
         this.router.navigateByUrl("/portal")
+        // Store this as a global variable in the service
         console.log(data.authenticatedEmail)
+        this.session.setEmail(data.authenticatedEmail);
       }
     })
   }

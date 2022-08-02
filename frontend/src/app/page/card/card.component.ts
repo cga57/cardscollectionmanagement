@@ -7,6 +7,7 @@ import { Brand } from "src/app/model/brand";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { StorageApiService } from "src/app/service/storage-api.service";
+import { UserSessionService } from "src/app/service/user-session.service";
 
 @Component({
   selector: "app-card",
@@ -20,9 +21,12 @@ export class CardComponent implements OnInit {
     private router: Router,
     private location: Location,
     private storage: StorageApiService,
+    private session: UserSessionService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.session.getEmail)
+  }
 
   goBack(): void {
     this.location.back();

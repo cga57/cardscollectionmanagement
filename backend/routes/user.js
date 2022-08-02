@@ -12,9 +12,15 @@ const bcrypt = require('bcryptjs')
 // this is for adding a user to user collection
 router.post( "/user", async( req, res ) => 
 {
-	console.log( "Registering a new user to db..." );
 
   const userData = req.body;
+  const email = userData.email;
+  const activeUser = await User.findOne({ email });
+  if(activeUser){
+    return res.send({msg: "Already registered"});
+  }
+  console.log( "Registering a new user to db..." );
+
   const hashed = await bcrypt.hash(userData.password, 12);
   userData.password = hashed;
   const newUser = User(userData);
