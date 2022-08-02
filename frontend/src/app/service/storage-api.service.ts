@@ -40,7 +40,14 @@ export class StorageApiService
 		return this.http.delete<Deck>( this.url + 'deck/' + id );
 	}
 
-	public addUserDeck( userDeck: UserDeck, deck?: Deck ): Observable<string>
+	// retrieve an user deck; return user deck
+	public getUserDeck( id: string ): Observable<UserDeck>
+	{
+		return this.http.get<UserDeck>( this.url + 'userDeck/' + id );
+	}
+
+	// add a new user deck; return the new user deck
+	public addUserDeck( userDeck: UserDeck, deck?: Deck ): Observable<UserDeck>
 	{
 		if( deck )
 		{
@@ -48,14 +55,26 @@ export class StorageApiService
 				map( data =>
 				{
 					userDeck.deck = data._id;
-					return this.http.post<string>( this.url + 'userDeck', userDeck );
+					return this.http.post<UserDeck>( this.url + 'userDeck', userDeck );
 				} ),
 				concatAll(),
 			);
 		}
 		else
 		{
-			return this.http.post<string>( this.url + 'userDeck', userDeck );
+			return this.http.post<UserDeck>( this.url + 'userDeck', userDeck );
 		}
+	}
+
+	// update an user deck; return user deck before update
+	public updateUserDeck( userDeck: UserDeck ): Observable<UserDeck>
+	{
+		return this.http.put<UserDeck>( this.url + 'userDeck', userDeck );
+	}
+
+	// delete an user deck; return the user deck deleted
+	public deleteUserDeck( id: string ): Observable<UserDeck>
+	{
+		return this.http.delete<UserDeck>( this.url + 'userDeck/' + id );
 	}
 }
