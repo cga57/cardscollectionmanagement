@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CollectionComponent implements OnInit {
 
-	decks = sampleDecks;
+	decks = [];
 
 	constructor(private router: Router,) { }
 

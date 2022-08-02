@@ -6,6 +6,7 @@ const path = require("path");
 const deckRoute = require( './routes/deck' );
 const userDeckRoute = require('./routes/userDeck');
 const userRoute = require('./routes/user')
+const imageRoute = require( './routes/image' );
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 const User = require("./models/user").Model;
@@ -13,22 +14,6 @@ const bcrypt = require('bcryptjs')
 
 
 const app = express();
-
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images")
-  },
-  filename: (req, file, cb) => {
-    console.log(file);
-    // Store the file as the current date and the name of the files together
-    // To ensure that each image name is unique
-    cb(null, file.originalname)
-  }
-});
-
-const upload = multer({storage: storage});
-
 port = 3081;
 
 // code for authentication put here - eventually can be put into a seperate file
@@ -73,7 +58,7 @@ app.use(
   })
 );
 
-// we should pass this into the login
+// passed into /api/login
 const auth = (req, res, next) => { 
   if (req.session.isAuth) {
     next()
@@ -81,6 +66,8 @@ const auth = (req, res, next) => {
     // req.redirect('login')
   }
 }
+app.use( '/api', userRoute );
+app.use( '/api', imageRoute );
 
 // serve frontend application
 app.get("/", (req, res) => {
@@ -93,12 +80,8 @@ app.listen(port, function () {
   console.log(`Server is running on port ${port}`);
 });
 
-app.post("/api/addImage", upload.single("deck-img"), (req, res) => {
-  res.status(204);
-  res.end();
-});
 
-app.get("/api/login", async (req, res) => {
+app.get("/api/login",auth,async (req, res) => {
   // ask db if this is a valid applicationUser based on req.body
   applicationUser = req.body;
   email = applicationUser.email
@@ -112,19 +95,4 @@ app.get("/api/login", async (req, res) => {
   }
   req.session.isAuth = true;
   // return res.redirect("/mainPortal")
-  
-
-
-
-
-  // if (applicationUser) {
-  //   // valid login
-  //   req.session.usr = applicationUser;
-  //   console.log("Authenticated!");
-  //   res.send(`<a href="/session2"> NEXT PAGE </a>`);
-  // } else {
-  //   // invalid - redirect them to login again
-  //   // eventually plan to only implement logins that are not found in the users database
-  //   console.log("Error in login")
-  // }
-});
+  });

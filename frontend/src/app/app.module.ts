@@ -40,7 +40,7 @@ export class HammerConfig extends HammerGestureConfig
     RegisterComponent,
     PortalComponent,
     NavbarComponent,
-    CollectionComponent
+    CollectionComponent,
   ],
   imports: [
     BrowserModule,
