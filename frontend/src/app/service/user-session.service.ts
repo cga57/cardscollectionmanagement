@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Deck } from '../model/deck';
-import { UserDeck } from '../model/user-deck';
+import { environment } from 'src/environments/environment';
 import { Collection } from '../model/collection';
 import { StorageApiService } from './storage-api.service';
 
@@ -11,13 +11,17 @@ import { StorageApiService } from './storage-api.service';
 export class UserSessionService {
 
 	// Default values
+	url = environment.serverAPI;
 	email: string = "null";
 	loggedIn: boolean = false;
 	private collection: Collection;
 	private broadcast: BehaviorSubject<Collection>;
 	
 
-	constructor( private storage: StorageApiService ) 
+	constructor( 
+		private http: HttpClient,
+		private storage: StorageApiService,
+	) 
 	{ 
 		this.collection =
 		{
@@ -55,5 +59,7 @@ export class UserSessionService {
 	logout(): void {
 		this.email = "null"
 		this.loggedIn = false
+		this.http.delete( this.url + 'logout' )
+			.subscribe( data => console.log( data ) );
 	}
 }

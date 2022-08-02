@@ -101,3 +101,25 @@ app.post("/api/login", async (req, res) => {
   req.session.email = email;
   res.send({msg: "Portal", authenticatedEmail: email});
 });
+
+app.delete( '/api/logout', ( req, res ) =>
+{
+	if( req.session )
+	{
+		req.session.destroy( err =>
+		{
+			if( err )
+			{
+				res.status( 400 ).json( 'Log out failed' );
+			}
+			else
+			{
+				res.status( 200 ).json( 'Log out successful' );
+			}
+		} );
+	}
+	else
+	{
+		res.end();
+	}
+} );
