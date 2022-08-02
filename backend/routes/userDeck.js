@@ -4,7 +4,7 @@ const UserDeck = require("../models/userDeck").Model;
 const router = express.Router();
 
 
-// retrieve a deck from table
+// retrieve an user deck from user collection
 router.get( '/userDeck/:id', async( req, res ) =>
 {
 	console.log( 'Retrieving an user deck from database...' );
@@ -30,7 +30,7 @@ router.post( "/userDeck", async( req, res ) =>
 	}
 });
 
-// update a deck in the table
+// update an user deck in user collection
 router.put( '/userDeck', async( req, res ) =>
 {
 	console.log( 'Updating an user deck in database...' );
@@ -38,6 +38,22 @@ router.put( '/userDeck', async( req, res ) =>
 	const id = req.body._id;
 	const deck = UserDeck( req.body );
 	UserDeck.findByIdAndUpdate( id, deck, ( err, deck ) => responseHandler( err, deck, res, 'updating' ) );
+} );
+
+// delete an user deck from user collection
+router.delete( '/userDeck/:id', async( req, res ) =>
+{
+	console.log( 'Deleting an user deck from database...' );
+	const deck = await UserDeck.findById( req.params.id ).exec();
+	const assciatedDeck = await Deck.findById( deck.deck ).exec();
+	
+	if( !assciatedDeck.isPublic )
+	{
+		console.log( 'Deleting a deck from database...' );
+		Deck.findByIdAndDelete( assciatedDeck._id ).exec();
+	}
+
+	UserDeck.findByIdAndDelete( deck._id, ( err, deck ) => responseHandler( err, deck, res, 'deleting' ) );
 } );
 
 // handle database api callback and respond to client
