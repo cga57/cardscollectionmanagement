@@ -84,18 +84,18 @@ app.listen(port, function () {
 app.get("/api/login", async (req, res) => {
   // ask db if this is a valid applicationUser based on req.body
   applicationUser = req.body;
+  console.log(applicationUser);
   email = applicationUser.email
   const activeUser = await User.findOne({ email })
   if (!activeUser) {
-    res.send("Login");
+    res.send({msg: "Login"});
     return;
   } 
   const check = await bcrypt.compare(activeUser.password, password)
   if (!check) {
-    // return res.redirect("/login")
-    res.send("Login");
+    res.send({msg: "Login"});
     return;
   }
   req.session.isAuth = true;
-  res.send("Portal");
+  res.send({msg: "Portal"});
 });
