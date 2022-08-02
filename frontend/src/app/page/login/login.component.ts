@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.http.get("http://localhost:3081/api/login").subscribe((data: any) => {
-      console.log(data);
-      if(data == "Login") {
+      console.log(data.msg);
+      if(data.msg == "Login") {
         this.router.navigateByUrl("/login")
-      } else if(data == "Portal") {
+      } else if(data.msg == "Portal") {
         this.router.navigateByUrl("/portal")
       }
     })
