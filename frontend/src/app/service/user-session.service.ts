@@ -94,5 +94,6 @@ export class UserSessionService {
 			.subscribe( data => console.log( data ) );
 		sessionStorage.removeItem( 'userEmail' );
 		this.broadcastLoginStatus.next( this.loggedIn );
+		this.router.navigateByUrl( '/' );
 	}
 }
