@@ -81,17 +81,20 @@ app.listen(port, function () {
 });
 
 
-app.get("/api/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   // ask db if this is a valid applicationUser based on req.body
   applicationUser = req.body;
   console.log(applicationUser);
-  email = applicationUser.email
+  email = applicationUser.email;
+  console.log(email);
   const activeUser = await User.findOne({ email })
+  console.log(activeUser);
   if (!activeUser) {
     res.send({msg: "Login"});
     return;
   } 
   const check = await bcrypt.compare(activeUser.password, password)
+  console.log(check)
   if (!check) {
     res.send({msg: "Login"});
     return;

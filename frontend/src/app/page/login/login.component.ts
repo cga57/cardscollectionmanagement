@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { User } from "src/app/model/user";
 
 @Component({
   selector: "app-login",
@@ -22,7 +23,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.http.get("http://localhost:3081/api/login").subscribe((data: any) => {
+
+    var password: string = (<HTMLInputElement>document.getElementById("password"))
+      .value;
+    var email: string = (<HTMLInputElement>document.getElementById("email"))
+      .value;
+
+    var user: any = {email: email, password: password };
+
+    this.http.post("http://localhost:3081/api/login", user).subscribe((data: any) => {
       console.log(data.msg);
       if(data.msg == "Login") {
         this.router.navigateByUrl("/login")
