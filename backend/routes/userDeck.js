@@ -1,4 +1,5 @@
 const express = require( 'express' );
+const session = require("express-session");
 const Deck = require( '../models/deck' ).Model;
 const UserDeck = require("../models/userDeck").Model;
 const router = express.Router();
@@ -19,7 +20,7 @@ router.post( "/userDeck", async( req, res ) =>
 	const data = req.body;
 	const userDeck = UserDeck( data[0] );
 
-	console.log(userDeck)
+	console.log( req.session )
 
 	// need to add new deck as well
 	if( data.length === 2 )
@@ -27,6 +28,14 @@ router.post( "/userDeck", async( req, res ) =>
 		console.log( "Posting a new deck to database..." );
 
 		const deck = Deck( data[1] );
+
+		// reformat image string
+		if( deck.image )
+			deck.image = deck.image.split( /[\\/]/ ).pop();
+		else
+			deck.image = 'no_image.png';
+
+		// save deck
 		deck.save( ( err, deck ) =>
 		{
 			if( err )

@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
+router.use( '/images', express.static( path.join( __dirname, '../', IMAGE_DIR ) ) );
 
 // fetch an image from disk
 router.get( '/image/:id', async( req, res ) =>

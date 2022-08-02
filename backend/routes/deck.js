@@ -17,6 +17,13 @@ router.post( "/deck", async( req, res ) =>
 
 	const deckData = req.body;
 	const newDeck = Deck( deckData );
+	
+	// reformat image string
+	if( newDeck.image )
+		newDeck.image = newDeck.image.split( /[\\/]/ ).pop();
+	else
+		newDeck.image = 'no_image.png';
+
 	newDeck.save( ( err, deck ) => responseHandler( err, deck, res, 'adding' ) );
 } );
 

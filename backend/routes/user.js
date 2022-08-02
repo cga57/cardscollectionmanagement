@@ -32,12 +32,12 @@ router.post( "/user", async( req, res ) =>
 
 // haven't test
 // retrieve all user decks for a specific user
-router.get( '/allDecks/:userId', async( req, res ) =>
+router.get( '/user/allDecks', async( req, res ) =>
 {
 	console.log( 'Retrieving all decks for an user from database' );
-	
-	const uid = req.params.userId;
-	const userDecks = await UserDeck.find( { user_id: uid } ).exec();
+
+	const userEmail = req.session.email;
+	const userDecks = await UserDeck.find( { email: userEmail } ).exec();
 	const deckIds = userDecks.map( ud => ud.deck );
 	const decks = await Deck.find( { _id: { $in: deckIds } } ).exec();
 
