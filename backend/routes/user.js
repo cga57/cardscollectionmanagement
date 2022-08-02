@@ -1,6 +1,7 @@
 const express = require( 'express' );
 const User = require("../models/user").Model;
 const router = express.Router();
+const bcrypt = require('bcryptjs')
 
 
 /********** user api **********/
@@ -11,11 +12,12 @@ router.post( "/user", async( req, res ) =>
 {
 	console.log( "Registering a new user to db..." );
 
-	const userData = req.body;
+  const userData = req.body;
+  const hashed = await bcrypt.hash(userData.password, 12);
+  userData.password = hashed;
   const newUser = User(userData);
   newUser.save( ( err, user ) => responseHandler( err, user, res, 'adding' ) );
 
-	
 });
 
 // handle database api callback and respond to client
