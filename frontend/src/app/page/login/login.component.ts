@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
     var user: any = {email: email, password: password };
 
-    this.http.post("http://localhost:3081/api/login", user).subscribe((data: any) => {
+    this.http.post(this.url + "login", user).subscribe((data: any) => {
       console.log(data.msg);
       if(data.msg == "Login") {
         this.router.navigateByUrl("/login")
