@@ -98,5 +98,6 @@ app.post("/api/login", async (req, res) => {
     return;
   }
   req.session.isAuth = true;
+  req.session.email = email;
   res.send({msg: "Portal", authenticatedEmail: email});
 });
