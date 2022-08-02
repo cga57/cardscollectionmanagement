@@ -39,7 +39,8 @@ app.use(express.static("dist/cardessory"));
 app.use(express.json());
 app.use( '/api', deckRoute );
 app.use('/api', userDeckRoute);
-app.use('/api', userRoute);
+app.use( '/api', userRoute );
+app.use( '/api', imageRoute );
 
 const authenticationStorage = new MongoDBSession({
   uri: uri,
@@ -66,8 +67,6 @@ const auth = (req, res, next) => {
     // req.redirect('login')
   }
 }
-app.use( '/api', userRoute );
-app.use( '/api', imageRoute );
 
 // serve frontend application
 app.get("/", (req, res) => {
