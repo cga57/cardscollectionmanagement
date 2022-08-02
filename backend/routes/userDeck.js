@@ -11,22 +11,37 @@ router.get( '/userDeck/:id', async( req, res ) =>
 	UserDeck.findById( req.params.id, ( err, deck ) => responseHandler( err, deck, res, 'retrieving' ) );
 } );
 
-// this is for adding a deck to user collection
+// this is for adding an user deck to user collection
 router.post( "/userDeck", async( req, res ) => 
 {
 	console.log( "Posting a new user deck to database..." );
 
-	const deckData = req.body;
-	const newDeck = UserDeck( deckData );
-	const assciatedDeck = await Deck.findById( newDeck.deck ).exec();
+	const data = req.body;
+	const userDeck = UserDeck( data[0] );
 
-	if( assciatedDeck )
+	// need to add new deck as well
+	if( data.length === 2 )
 	{
-		newDeck.save( ( err, deck ) => responseHandler( err, deck, res, 'adding' ) );
+		console.log( "Posting a new deck to database..." );
+
+		const deck = Deck( data[1] );
+		deck.save( ( err, deck ) =>
+		{
+			if( err )
+			{
+				console.log( err );
+				res.status( 500 ).json( `Issue with adding deck in database` );
+			}
+			else
+			{
+				userDeck.deck = deck._id;
+				userDeck.save( ( err, deck ) => responseHandler( err, deck, res, 'adding' ) );
+			}
+		} );
 	}
-	else
+	else if( data.length === 1 )
 	{
-		res.status( 400 ).json( "The associated deck is not in database" );
+		userDeck.save( ( err, deck ) => responseHandler( err, deck, res, 'adding' ) );
 	}
 });
 
@@ -44,16 +59,29 @@ router.put( '/userDeck', async( req, res ) =>
 router.delete( '/userDeck/:id', async( req, res ) =>
 {
 	console.log( 'Deleting an user deck from database...' );
-	const deck = await UserDeck.findById( req.params.id ).exec();
-	const assciatedDeck = await Deck.findById( deck.deck ).exec();
+	const userDeck = await UserDeck.findById( req.params.id ).exec();
+	const assciatedDeck = await Deck.findById( userDeck.deck ).exec();
 	
-	if( !assciatedDeck.isPublic )
+	if( assciatedDeck && !assciatedDeck.isPublic )
 	{
 		console.log( 'Deleting a deck from database...' );
-		Deck.findByIdAndDelete( assciatedDeck._id ).exec();
+		Deck.findByIdAndDelete( assciatedDeck._id, ( err, deck ) =>
+		{
+			if( err )
+			{
+				console.log( err );
+				res.status( 500 ).json( 'Issue with deleting deck in database' );
+			}
+			else
+			{
+				UserDeck.findByIdAndDelete( userDeck._id, ( err, deck ) => responseHandler( err, deck, res, 'deleting' ) );
+			}
+		} );
 	}
-
-	UserDeck.findByIdAndDelete( deck._id, ( err, deck ) => responseHandler( err, deck, res, 'deleting' ) );
+	else
+	{
+		UserDeck.findByIdAndDelete( userDeck._id, ( err, deck ) => responseHandler( err, deck, res, 'deleting' ) );
+	}
 } );
 
 // handle database api callback and respond to client
