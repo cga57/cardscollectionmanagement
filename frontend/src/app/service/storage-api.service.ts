@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { observable, Observable, throwError } from 'rxjs';
-import { catchError, concatAll, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Deck } from '../model/deck';
 import { UserDeck } from '../model/user-deck';
+import { User } from '../model/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -78,4 +78,32 @@ export class StorageApiService
 	{
 		return this.http.delete<UserDeck>( this.url + 'userDeck/' + id );
 	}
+
+
+	/********** user api **********/ 
+
+
+	//// retrieve a user; return user
+	//public getUser( id: string ): Observable<User>
+	//{
+		//return this.http.get<User>( this.url + 'user/' + id );
+	//}
+
+	// add a new user; return the new user
+	public addUser( user: User ): Observable<User>
+	{
+		return this.http.post<User>( this.url + 'user', user );
+	}
+
+	//// update a user; return user before update
+	//public updateUser( user: User ): Observable<User>
+	//{
+		//return this.http.put<User>( this.url + 'user', user );
+	//}
+
+	//// delete a user; return the user deleted
+	//public deleteUser( id: string ): Observable<User>
+	//{
+		//return this.http.delete<User>( this.url + 'user/' + id );
+	//}
 }
