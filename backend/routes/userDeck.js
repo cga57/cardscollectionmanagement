@@ -5,22 +5,34 @@ const UserDeck = require("../models/userDeck").Model;
 const router = express.Router();
 
 
+// verify if user is logged in
+const authVerifier = ( req, res, next ) =>
+{
+	if( req.session.isAuth )
+	{
+		next()
+	}
+	else
+	{
+		res.status( 401 ).json( 'Not logged in' );
+	}
+}
+
 // retrieve an user deck from user collection
-router.get( '/userDeck/:id', async( req, res ) =>
+router.get( '/userDeck/:id', [ authVerifier, async( req, res ) =>
 {
 	console.log( 'Retrieving an user deck from database...' );
 	UserDeck.findById( req.params.id, ( err, deck ) => responseHandler( err, deck, res, 'retrieving' ) );
-} );
+} ] );
 
 // this is for adding an user deck to user collection
-router.post( "/userDeck", async( req, res ) => 
+router.post( "/userDeck", [ authVerifier, async( req, res ) => 
 {
 	console.log( "Posting a new user deck to database..." );
 
 	const data = req.body;
 	const userDeck = UserDeck( data[0] );
-
-	console.log( req.session )
+	userDeck.email = req.session.email;
 
 	// need to add new deck as well
 	if( data.length === 2 )
@@ -54,23 +66,35 @@ router.post( "/userDeck", async( req, res ) =>
 	{
 		userDeck.save( ( err, deck ) => responseHandler( err, deck, res, 'adding' ) );
 	}
-});
+} ] );
 
 // update an user deck in user collection
-router.put( '/userDeck', async( req, res ) =>
+router.put( '/userDeck', [ authVerifier, async( req, res ) =>
 {
-	console.log( 'Updating an user deck in database...' );
+	// verify if it's the correct user updating
+	if( req.body.email != req.session.email )
+	{
+		return res.status( 403 ).json( 'Incorrect user' );
+	}
 
+	console.log( 'Updating an user deck in database...' );
 	const id = req.body._id;
 	const deck = UserDeck( req.body );
 	UserDeck.findByIdAndUpdate( id, deck, ( err, deck ) => responseHandler( err, deck, res, 'updating' ) );
-} );
+} ] );
 
 // delete an user deck from user collection
-router.delete( '/userDeck/:id', async( req, res ) =>
+router.delete( '/userDeck/:id', [ authVerifier, async( req, res ) =>
 {
 	console.log( 'Deleting an user deck from database...' );
 	const userDeck = await UserDeck.findById( req.params.id ).exec();
+
+	// verify if it's the correct user deleting
+	if( userDeck.email != req.session.email )
+	{
+		return res.status( 403 ).json( 'Incorrect user' );
+	}
+
 	const assciatedDeck = await Deck.findById( userDeck.deck ).exec();
 	
 	if( assciatedDeck && !assciatedDeck.isPublic )
@@ -93,7 +117,7 @@ router.delete( '/userDeck/:id', async( req, res ) =>
 	{
 		UserDeck.findByIdAndDelete( userDeck._id, ( err, deck ) => responseHandler( err, deck, res, 'deleting' ) );
 	}
-} );
+} ] );
 
 // handle database api callback and respond to client
 const responseHandler = ( error, doc, res, mode ) =>
