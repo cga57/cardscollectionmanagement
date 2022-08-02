@@ -108,9 +108,9 @@ export class StorageApiService
 	//}
 	
 	// retrieve all decks of a user; return [ UserDeck[], Deck[] ]
-	public getAllDecks( uid: string ): Observable<[]>
+	public getAllDecks(): Observable<[ UserDeck[], Deck[] ]>
 	{
-		return this.http.get<[]>( this.url + 'allDecks/' + uid );
+		return this.http.get<[ UserDeck[], Deck[] ]>( this.url + 'user/allDecks' );
 	}
 	
 
