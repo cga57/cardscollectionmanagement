@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { StorageApiService } from "src/app/service/storage-api.service";
+import { User } from "src/app/model/user";
 
 @Component({
   selector: "app-register",
@@ -14,7 +16,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
-    private http: HttpClient
+    private http: HttpClient,
+    private storage: StorageApiService,
+
   ) {}
 
   ngOnInit(): void {}
@@ -34,10 +38,13 @@ export class RegisterComponent implements OnInit {
     var password: string = (<HTMLInputElement>document.getElementById("pwd"))
       .value;
 
-    var jsonFormat = { name: name, email: email, password: password };
+    var user: User = { name: name, email: email, password: password };
 
-    this.http.post(this.url + "user", jsonFormat).subscribe((data) => {
-      console.log(data);
-    });
+    this.storage.addUser( user )
+		.subscribe( {
+			next: data => console.log('successfully registered new user'),
+			error: err => console.error( err.error ),
+		} );
+
   }
 }

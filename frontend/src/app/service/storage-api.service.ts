@@ -106,4 +106,14 @@ export class StorageApiService
 	//{
 		//return this.http.delete<User>( this.url + 'user/' + id );
 	//}
+	
+
+	/********** image api **********/ 
+
+
+	// retrieve an image; return image in blob
+	public getImage( id: string ): Observable<Blob>
+	{
+		return this.http.get( this.url + 'image/' + id, { responseType: 'blob' } );
+	}
 }
