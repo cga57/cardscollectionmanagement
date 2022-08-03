@@ -5,14 +5,15 @@ import { LoginComponent } from './page/login/login.component';
 import { CardComponent } from './page/card/card.component';
 import { RegisterComponent } from './page/register/register.component';
 import { PortalComponent } from './page/portal/portal.component';
+import {AuthGuard} from './guard/auth.guard';
 
 const routes: Routes = 
 [
 	{ path: '', component: ExploreComponent },
 	{ path: 'login', component: LoginComponent },
-  	{ path: 'card', component: CardComponent},
+  	{ path: 'card', component: CardComponent, canActivate: [ AuthGuard ] },
 	{ path: 'register', component: RegisterComponent},
-	{ path: 'portal', component: PortalComponent },
+	{ path: 'portal', component: PortalComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule({
