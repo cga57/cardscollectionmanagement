@@ -23,10 +23,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  navigateToLogin(): void {
-    this.router.navigateByUrl("/login");
-  }
-
   goBack(): void {
     this.location.back();
   }
@@ -42,7 +38,10 @@ export class RegisterComponent implements OnInit {
 
     this.storage.addUser( user )
 		.subscribe( {
-			next: data => console.log('user is registered succesfully'),
+			next: data => {
+        console.log('user is registered succesfully')
+        this.router.navigateByUrl("/login");
+      },
       error: err => console.error(err.error),
     });
   }
