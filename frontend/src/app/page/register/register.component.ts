@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
 import { StorageApiService } from "src/app/service/storage-api.service";
 import { User } from "src/app/model/user";
 
@@ -12,11 +10,9 @@ import { User } from "src/app/model/user";
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-  private url = environment.serverAPI;
   constructor(
     private router: Router,
     private location: Location,
-    private http: HttpClient,
     private storage: StorageApiService,
 
   ) {}

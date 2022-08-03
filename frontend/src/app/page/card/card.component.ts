@@ -4,8 +4,6 @@ import { Location } from "@angular/common";
 import { Deck } from "src/app/model/deck";
 import { UserDeck } from "src/app/model/user-deck";
 import { Brand } from "src/app/model/brand";
-import { HttpClient } from "@angular/common/http";
-import { map } from 'rxjs/operators';
 import { environment } from "src/environments/environment";
 import { StorageApiService } from "src/app/service/storage-api.service";
 import { UserSessionService } from "src/app/service/user-session.service";

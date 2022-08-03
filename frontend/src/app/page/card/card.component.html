@@ -8,7 +8,7 @@
 				<img src="{{ deck ? this.url + 'images/' + deck.image : '' }}" id="img-preview" *ngIf="editable">
         <form method="POST" 
 							id="addImageForm" 
-							action="http://localhost:3081/api/addImage" 
+							action="{{ this.url + 'addImage' }}" 
 							enctype="multipart/form-data" 
 							*ngIf="editable"
 				>
