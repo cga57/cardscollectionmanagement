@@ -14,7 +14,7 @@ import {Deck} from 'src/app/model/deck';
 export class CollectionComponent implements OnInit {
 
 	collection: Collection = { decks: [], userDecks: [] };
-	imageAPI = environment.serverAPI + '/images/';
+	imageAPI = environment.serverAPI + 'images/';
 
 	constructor( private router: Router,
 				 private user: UserSessionService,
