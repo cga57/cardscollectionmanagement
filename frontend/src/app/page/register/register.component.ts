@@ -23,6 +23,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  navigateToLogin(): void {
+    this.router.navigateByUrl("/login");
+  }
+
   goBack(): void {
     this.location.back();
   }
