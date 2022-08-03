@@ -77,11 +77,16 @@
 								(click)="setAllInputs()"
 								*ngIf="editable"
 								>Cancel</button>
-				<button class="btn btn-primary text-white" 
+				<button class="btn btn-primary me-3 text-white" 
 								style="min-width: 200px;"
 								(click)="editAttributes()"
 								*ngIf="!editable"
 				>Edit</button>
+				<button class="btn btn-danger" 
+								style="min-width: 200px;"
+								(click)="deleteDeck()"
+								*ngIf="!editable"
+				>Delete</button>
       </div>
     </div>
 </div>

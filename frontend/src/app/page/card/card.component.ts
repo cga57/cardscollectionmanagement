@@ -234,4 +234,17 @@ export class CardComponent implements OnInit {
 			} );
 		}
 	}
+
+	deleteDeck(): void
+	{
+		this.storage.deleteUserDeck( this.userDeck!._id! )
+			.subscribe( {
+				next: data => 
+				{
+					console.log( 'successfully deleted user deck' );
+					this.router.navigateByUrl( 'portal' );
+				},
+				error: err => console.error( err.error ),
+			} );
+	}
 }
