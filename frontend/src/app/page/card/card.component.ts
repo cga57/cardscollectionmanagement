@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { Location } from "@angular/common";
 import { Deck } from "src/app/model/deck";
 import { UserDeck } from "src/app/model/user-deck";
@@ -129,7 +129,10 @@ saveInventory(): void {
 
 	this.storage.addUserDeck( user_deck, deck_object )
 		.subscribe( {
-			next: data => console.log( 'successfully added user deck' ),
+			next: data => {
+        console.log( 'successfully added user deck' )
+        this.router.navigateByUrl('portal');
+      },
 			error: err => console.error( err.error ),
 		} );
   }
