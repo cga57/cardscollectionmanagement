@@ -41,7 +41,7 @@ router.get( '/user/allDecks', async( req, res ) =>
 	const deckIds = userDecks.map( ud => ud.deck );
 	const decks = await Deck.find( { _id: { $in: deckIds } } ).exec();
 
-	if( userDecks.length !== 0 && decks.length !== 0 )
+	if( userDecks.length === decks.length )
 	{
 		res.status( 200 ).json( [ userDecks, decks ] );
 	}
