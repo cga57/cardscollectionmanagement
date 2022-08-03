@@ -210,21 +210,26 @@ export class CardComponent implements OnInit {
 			{
 				deck_object._id = this.deck._id;
 				this.storage.updateDeck( deck_object )
-					.subscribe( d => console.log( d ) );
+					.subscribe();
 			}
 			if( user_deck != this.userDeck )
 			{
 				user_deck._id = this.userDeck._id;
 				user_deck.deck = this.userDeck.deck;
 				this.storage.updateUserDeck( user_deck )
-					.subscribe( d => console.log( d ) );
+					.subscribe();
 			}
+			this.router.navigateByUrl( 'portal' );
 		}
 		else
 		{
 			this.storage.addUserDeck( user_deck, deck_object )
-			.subscribe( {
-				next: data => console.log( 'successfully added user deck' ),
+				.subscribe( {
+					next: data => 
+					{
+						console.log( 'successfully added user deck' );
+						this.router.navigateByUrl( 'portal' );
+					},
 					error: err => console.error( err.error ),
 			} );
 		}
