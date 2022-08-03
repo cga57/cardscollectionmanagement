@@ -5,12 +5,18 @@
       <button class="btn" style="margin-top:20px;" (click)="goBack()">← Back</button>
       <div class="card">
         <h3>Deck image:</h3>
-        <img id="img-preview">
-        <form method="POST" id="addImageForm" action="http://localhost:3081/api/addImage" enctype="multipart/form-data">
+				<img src="{{ deck ? this.url + 'images/' + deck.image : '' }}" id="img-preview" *ngIf="editable">
+        <form method="POST" 
+							id="addImageForm" 
+							action="http://localhost:3081/api/addImage" 
+							enctype="multipart/form-data" 
+							*ngIf="editable"
+				>
           <label for="deck-img">Select image:</label>
           <br>
           <input type="file" id="deck-img" name="deck-img" (change)="previewImage($event)">
         </form>
+				<img src="{{ this.url + 'images/' + deck!.image! }}" alt="card image" *ngIf="deck && !editable">
       </div>
       <div class="card">
         <h3>Product details:</h3>
@@ -35,7 +41,7 @@
       <div class="card">
         <h3>General details:</h3>
         <ul>
-          <li class="body-li"><p>Title: </p><input id="title" type="text"><br><br></li>
+          <li class="body-li"><p>Title: </p><input id="name" type="text"><br><br></li>
           <li class="body-li"><p>Edition: </p><input id="edition" type="text"><br><br></li>
           <li class="body-li"><p>Style: </p><input id="style" type="text"><br><br></li>
           <li class="body-li"><p>Brand: </p><input id="brand" type="text"><br><br></li>
@@ -52,10 +58,30 @@
       </div>
       <div style="margin-bottom:50px;" class="card">
         <h3>Notes:</h3>
-        <textarea id="notes"></textarea><br>
         <ul>
-          <li class="body-li"><button type="submit" form="addImageForm" class="btn btn-primary" (click)="saveInventory()">Save inventory</button></li>
+					<li class="body-li">
+						<textarea id="notes"></textarea><br>
+					</li>
         </ul>
+      </div>
+      <div style="margin-bottom:50px;" class="">
+				<button type="submit" 
+								form="addImageForm" 
+								class="btn btn-primary me-3 text-white" 
+								style="min-width: 200px;"
+								(click)="saveInventory()"
+								*ngIf="editable"
+				>Save inventory</button>
+				<button class="btn btn-danger" 
+								style="min-width: 200px;"
+								(click)="editAttributes()"
+								*ngIf="editable"
+								>Cancel</button>
+				<button class="btn btn-primary text-white" 
+								style="min-width: 200px;"
+								(click)="editAttributes()"
+								*ngIf="!editable"
+				>Edit</button>
       </div>
     </div>
 </div>

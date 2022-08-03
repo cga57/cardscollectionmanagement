@@ -34,6 +34,13 @@ router.put( '/deck', async( req, res ) =>
 
 	const id = req.body._id;
 	const deck = Deck( req.body );
+
+	// reformat image string
+	if( deck.image )
+		deck.image = deck.image.split( /[\\/]/ ).pop();
+	else
+		deck.image = 'no_image.png';
+
 	Deck.findByIdAndUpdate( id, deck, ( err, deck ) => responseHandler( err, deck, res, 'updating' ) );
 } );
 

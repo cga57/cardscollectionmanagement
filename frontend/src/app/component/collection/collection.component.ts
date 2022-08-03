@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {UserSessionService} from 'src/app/service/user-session.service';
 import {Collection} from 'src/app/model/collection';
 import {environment} from 'src/environments/environment';
+import {Deck} from 'src/app/model/deck';
 
 @Component({
 	selector: 'app-collection',
@@ -25,7 +26,15 @@ export class CollectionComponent implements OnInit {
 			.subscribe( c => this.collection = c );
 	}
 
-	navigateToCard(): void {
-		this.router.navigateByUrl('/card');
+	navigateToCard( deck?: Deck ): void 
+	{
+		if( deck )
+		{
+			this.router.navigateByUrl( '/card/' + deck._id );
+		}
+		else
+		{
+			this.router.navigateByUrl('/card');
+		}
 	}
 }

@@ -80,6 +80,7 @@ router.put( '/userDeck', [ authVerifier, async( req, res ) =>
 	console.log( 'Updating an user deck in database...' );
 	const id = req.body._id;
 	const deck = UserDeck( req.body );
+	console.log( id );
 	UserDeck.findByIdAndUpdate( id, deck, ( err, deck ) => responseHandler( err, deck, res, 'updating' ) );
 } ] );
 

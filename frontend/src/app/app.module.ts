@@ -19,6 +19,7 @@ import { RegisterComponent } from './page/register/register.component';
 import { PortalComponent } from './page/portal/portal.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { CollectionComponent } from './component/collection/collection.component';
+import { DeckComponent } from './page/deck/deck.component';
 
 // hammer config
 @Injectable() 
@@ -42,6 +43,7 @@ export class HammerConfig extends HammerGestureConfig
     PortalComponent,
     NavbarComponent,
     CollectionComponent,
+    DeckComponent,
   ],
   imports: [
     BrowserModule,
